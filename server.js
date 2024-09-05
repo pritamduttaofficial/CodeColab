@@ -59,6 +59,14 @@ io.on("connection", (socket) => {
     socket.in(roomId).emit("code_change", { code });
   });
 
+  socket.on("chat_message", ({ roomId, username, message }) => {
+    // Broadcast the message to everyone in the room
+    io.to(roomId).emit("chat_message", {
+      username,
+      message,
+    });
+  });
+
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];
     rooms.forEach((roomId) => {

@@ -2,8 +2,26 @@ import React, { useState } from "react";
 import { FaHouseUser, FaUsers } from "react-icons/fa";
 import Avatar from "react-avatar";
 import { IoCopy, IoExit } from "react-icons/io5";
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Sidebar({ clients, host }) {
+  const { roomId } = useParams();
+  const navigate = useNavigate();
+
+  async function copyRoomId() {
+    try {
+      await navigator.clipboard.writeText(roomId);
+      toast.success("Copied to Clipboard");
+    } catch (err) {
+      toast.error("Could not copy the Room ID");
+    }
+  }
+
+  function leaveRoom() {
+    navigate("/");
+  }
+
   return (
     <div>
       <div className="flex h-screen flex-col justify-between border-e bg-[#22252c]">
@@ -29,7 +47,10 @@ function Sidebar({ clients, host }) {
             <div className="mt-4 flex items-center justify-evenly gap-2 flex-wrap">
               {clients?.map((client) =>
                 client?.username !== host ? (
-                  <div className="flex flex-col justify-center items-center">
+                  <div
+                    key={client?.socketId}
+                    className="flex flex-col justify-center items-center"
+                  >
                     <Avatar
                       name={client?.username}
                       size="40"
@@ -47,11 +68,17 @@ function Sidebar({ clients, host }) {
         </div>
 
         <div className="sticky inset-x-0 bottom-0 border-t border-gray-700 p-4">
-          <button className="w-full bg-lime-100 text-black px-4 py-2 mb-2 rounded flex items-center justify-center gap-2 font-semibold hover:bg-lime-200 duration-200">
+          <button
+            className="w-full bg-lime-100 text-black px-4 py-2 mb-2 rounded flex items-center justify-center gap-2 font-semibold hover:bg-lime-200 duration-200"
+            onClick={copyRoomId}
+          >
             Copy Room Id
             <IoCopy />
           </button>
-          <button className="w-full bg-transparent border text-white px-4 py-2 rounded flex items-center justify-center gap-2 font-semibold hover:bg-gray-900 duration-200">
+          <button
+            className="w-full bg-transparent border text-white px-4 py-2 rounded flex items-center justify-center gap-2 font-semibold hover:bg-gray-900 duration-200"
+            onClick={leaveRoom}
+          >
             Exit
             <IoExit className="text-xl" />
           </button>
