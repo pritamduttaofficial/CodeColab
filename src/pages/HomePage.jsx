@@ -30,15 +30,12 @@ function HomePage() {
 
   return (
     <div className="w-screen h-screen relative">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('bg1.jpg')` }}
-      >
+      <div className="absolute inset-0 bg-cover bg-center bg-gradient-to-tr from-slate-950 via-emerald-700 to-slate-950">
         <div className="absolute inset-0 bg-black opacity-70"></div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-lg bg-slate-700 mt-16 px-6 pt-6 rounded-lg bg-opacity-80 text-white">
+        <div className="mx-auto max-w-lg bg-teal-950 mt-16 px-6 pt-6 rounded-lg bg-opacity-80 text-white">
           <div className="flex items-center justify-center">
             <img src="/logo.png" alt="logo" className="w-36" />
           </div>
@@ -84,7 +81,7 @@ function HomePage() {
 
             <button
               type="submit"
-              className="block w-full rounded-lg bg-green-500 hover:bg-green-600 active:scale-95 duration-200 px-5 py-2 font-semibold text-white"
+              className="block w-full rounded-lg bg-green-600 hover:bg-green-700 active:scale-95 duration-200 px-5 py-2 font-semibold text-white"
             >
               Join
             </button>
