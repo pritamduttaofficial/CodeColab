@@ -19,7 +19,6 @@ function ChatSidebar({ isOpen, toggleSidebar, socketRef, username, roomId }) {
   useEffect(() => {
     if (socketRef.current) {
       socketRef.current.on("chat_message", ({ username, message }) => {
-        console.log(message);
         setMessages((prev) => [...prev, { username, message }]);
       });
     }

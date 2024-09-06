@@ -2,6 +2,8 @@ import express from "express";
 import { Server } from "socket.io";
 import http from "http";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
@@ -9,6 +11,16 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server);
+
+// Define __dirname in ES6 modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static("dist"));
+
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 // mapping username with socketId
 let socketUserInfo = {};
