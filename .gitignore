@@ -23,3 +23,5 @@ note
 *.njsproj
 *.sln
 *.sw?
+
+.env
